@@ -1,0 +1,11 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+To run the app in your R console, simply run
+
+```{r eval=FALSE}
+runGitHub( "finalProjectShiny", "<your username>")
+```
