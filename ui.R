@@ -6,7 +6,7 @@ library(finalProject)
 shinyUI(navbarPage("STAT 585",
                    tabPanel("Normal Plot",
                             sidebarLayout(
-                              sidebarPanel(
+                              sidebarPanel(width=3,
                                 selectInput("distributionType",
                                             label="Population Shape",
                                             choices = list("Normal"),
@@ -34,7 +34,7 @@ shinyUI(navbarPage("STAT 585",
                               ))),
                    tabPanel("Sampling Distribution of Sample Means",
                             sidebarLayout(
-                              sidebarPanel(selectInput("distributionType",
+                              sidebarPanel(width=3,selectInput("distributionType",
                                                        label="Population Shape",
                                                        choices = list("Normal",
                                                                       "Skewed Right",
@@ -54,9 +54,17 @@ shinyUI(navbarPage("STAT 585",
                                                         value=25),
                                            numericInput("numSamples",
                                                         label = "Number of Samples",
-                                                        value=1),
+                                                        value=2),
                                            actionButton("drawSample",label = "Draw Additional Samples")),
                               # Show a plot of the generated distribution
-                              mainPanel(plotlyOutput(outputId = "randomSampleDist"),
-                                plotlyOutput(outputId = "meanSamplingDist")
+                              mainPanel(
+                                fluidRow(
+                                  h4("Distribution of Sample Data:"),
+                                  column(7,plotlyOutput(outputId = "randomSampleDist",height = "300px")),
+                                  h4("Sample Summary Table:"),
+                                  column(5,tableOutput("randomSampleTable"))),
+                                  h4("Distribution of Sample Means:"),
+                                  plotlyOutput(outputId = "meanSamplingDist",height="300px"),
+                                  h4("Means Summary Table:"),
+                                  tableOutput("meansTable")
                               )))))
